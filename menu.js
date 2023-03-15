@@ -61,11 +61,11 @@ async function bebidas(){
 await mostrarRecetas(url,"drinks") 
 }
 
-async function pizzas(){
+/* async function pizzas(){
   let url = createBaseUrl();
   url.searchParams.append("q", "pizza");
 await mostrarRecetas(url, "pizza")
-}
+} */
 
 function createBaseUrl(){
   let url = new URL("https://api.edamam.com/api/recipes/v2")
@@ -87,12 +87,14 @@ async function getRecipes(url){
         name: element.recipe.label, 
         image: element.recipe.image,
         url: element.recipe.shareAs,
-        id : element.recipe.uri.split("_")[1],
+        urlRick : element.recipe.uri.split("_")[1],
         ingredients: element.recipe.ingredientLines
       };
     });
   })
-  console.log(recipes)
+  console.log(recipes);
+  let posiciones = [0,3,8,11,15,18];
+  return recipes.filter((recipe,ind)=> posiciones.includes(ind));
   return recipes;
 }
 
@@ -111,29 +113,37 @@ async function mostrarRecetas(url, nombre) {
     let recetaArticle = document.createElement("article");
     let recetaName = document.createElement("h2");
     let recetaImagen = document.createElement("img");
+    recetaImagen.onload = function(){ //muestra la imagen  cuando se carga el resto de elementos
+      recetaArticle.style.display = "block";
+    }
     let recetaUrl = document.createElement("a");
+    let recetaUrlRick = document.createElement("a");
+    recetaUrlRick.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
     let recetaIngredients = document.createElement("p");
   
   recetaArticle.classList.add("receta");
  
-  recetaName.innerText = hit.name;
+  recetaName.innerText = hit.name.replace(/\srecipe[s]?/gim, "")
+  .replace(/,[s]*/g, ", ");
   recetaImagen.src = hit.image;
   recetaUrl.setAttribute("href",hit.url);
-  recetaUrl.setAttribute("target", "_blank");
-  recetaUrl.innerText = "INFO";
+  recetaUrl.setAttribute("target", "_blank")
+  recetaUrlRick.setAttribute("target", "_blank");
+  recetaUrlRick.innerText = "Alergenos";
   recetaIngredients.innerText = hit.ingredients.join(", ");
 
   comida.appendChild(recetaArticle);
+  recetaUrl.appendChild(recetaImagen);
   recetaArticle.appendChild(recetaName);
-  recetaArticle.appendChild(recetaImagen);
   recetaArticle.appendChild(recetaUrl);
+  recetaArticle.appendChild(recetaUrlRick);
   recetaArticle.appendChild(recetaIngredients);
 });
 }
 
 async function menu(){
   await sandwiches();
-  await pizzas();
+ /*  await pizzas(); */
   await ensaladas();
   await primerPlato();
   await postres();

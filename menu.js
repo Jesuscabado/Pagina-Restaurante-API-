@@ -1,5 +1,5 @@
-
 /* 
+
 function searchRecipes(searchInput) {
   const baseUrl = createBaseUrl();
   baseUrl.pathname = "/search";
@@ -28,8 +28,8 @@ searchInput.addEventListener("Enter", event => {
   if (event.key === "Enter") {
     searchRecipes(searchInput);
   }
-}); */
-
+});
+ */
 
 async function primerPlato(){
   let url = createBaseUrl();
@@ -92,10 +92,8 @@ async function getRecipes(url){
       };
     });
   })
-  console.log(recipes);
   let posiciones = [0,3,8,11,15,18];
   return recipes.filter((recipe,ind)=> posiciones.includes(ind));
-  return recipes;
 }
 
 
@@ -118,7 +116,7 @@ async function mostrarRecetas(url, nombre) {
     }
     let recetaUrl = document.createElement("a");
     let recetaUrlRick = document.createElement("a");
-    recetaUrlRick.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+    recetaUrlRick.href = "https://youtu.be/dQw4w9WgXcQ?t=42autoplay=1&mute=0";
     let recetaIngredients = document.createElement("p");
   
   recetaArticle.classList.add("receta");

@@ -1,6 +1,6 @@
 
-
-/* function searchRecipes(searchInput) {
+/* 
+function searchRecipes(searchInput) {
   const baseUrl = createBaseUrl();
   baseUrl.pathname = "/search";
 
@@ -29,28 +29,66 @@ searchInput.addEventListener("Enter", event => {
     searchRecipes(searchInput);
   }
 }); */
-let url = createBaseUrl();
 
+
+async function primerPlato(){
+  let url = createBaseUrl();
+  url.searchParams.append("dishType", "main course");
+await mostrarRecetas(url,"primer plato")
+}
+
+async function ensaladas(){
+  let url = createBaseUrl();
+  url.searchParams.append("dishType", "salad");
+await mostrarRecetas(url,"ensaladas") 
+}
+
+async function sandwiches(){
+  let url = createBaseUrl();
+  url.searchParams.append("dishType", "sandwiches");
+await mostrarRecetas(url,"sandwiches") 
+}
+
+async function postres(){
+  let url = createBaseUrl();
+  url.searchParams.append("dishType", "desserts");
+await mostrarRecetas(url,"postres") 
+}
+
+async function bebidas(){
+  let url = createBaseUrl();
+  url.searchParams.append("dishType", "drinks");
+await mostrarRecetas(url,"drinks") 
+}
+
+async function pizzas(){
+  let url = createBaseUrl();
+  url.searchParams.append("q", "pizza");
+await mostrarRecetas(url, "pizza")
+}
 
 function createBaseUrl(){
   let url = new URL("https://api.edamam.com/api/recipes/v2")
   url.searchParams.set("app_id" , "2563a2b8")
   url.searchParams.set("app_key" , "27f59cd8a60bdc17f0a1745ca62cdf5b")
   url.searchParams.set("type", "public")
-  url.searchParams.set("q", "meat")
-  url.searchParams.set("nutrients[ENERC_KCAL]", "2000")
+  url.searchParams.set("cuisineType", "Caribbean")
+  url.searchParams.set("q", "PineApple")
+  url.searchParams.set("random", "true")
+  url.searchParams.set("nutrients[ENERC_KCAL]", "1000")
+  
   return url;
 }
 
-async function getRecipes(){
+async function getRecipes(url){
   let recipes = await fetch(url.toString()).then (response => response.json()).then(data => {
     return data.hits.map(element => {
       return {
-        name: element.recipe.label,
+        name: element.recipe.label, 
         image: element.recipe.image,
         url: element.recipe.shareAs,
         id : element.recipe.uri.split("_")[1],
-        ingredients: element.recipe.ingredients
+        ingredients: element.recipe.ingredientLines
       };
     });
   })
@@ -58,33 +96,52 @@ async function getRecipes(){
   return recipes;
 }
 
-async function mostrarRecetas(){
-  const recetas = await getRecipes();
-  const results = document.getElementById("results");
 
-  recetas.forEach(hit => {
-  let recetaArticle = document.createElement("article");
+async function mostrarRecetas(url, nombre) {
+  const recetas = await getRecipes(url);
+  const results = document.getElementById("results");
+  const comida = document.createElement("section");
+  const title = document.createElement("h1");
+  title.innerText = nombre;
+  comida.setAttribute("id", "sectionComida");
+  results.appendChild(title);
+  results.appendChild(comida);
+  
+  recetas.forEach((hit) => {
+    let recetaArticle = document.createElement("article");
+    let recetaName = document.createElement("h2");
+    let recetaImagen = document.createElement("img");
+    let recetaUrl = document.createElement("a");
+    let recetaIngredients = document.createElement("p");
+  
   recetaArticle.classList.add("receta");
-  let recetaName = document.createElement("h2");
-  let recetaImagen = document.createElement("img");
-  let recetaUrl = document.createElement("a");
- /*  let recetaIngredientes = document.createElement() */
+ 
   recetaName.innerText = hit.name;
   recetaImagen.src = hit.image;
   recetaUrl.setAttribute("href",hit.url);
   recetaUrl.setAttribute("target", "_blank");
   recetaUrl.innerText = "INFO";
+  recetaIngredients.innerText = hit.ingredients.join(", ");
 
-  results.appendChild(recetaArticle);
+  comida.appendChild(recetaArticle);
   recetaArticle.appendChild(recetaName);
   recetaArticle.appendChild(recetaImagen);
   recetaArticle.appendChild(recetaUrl);
-
-  });
- 
-
+  recetaArticle.appendChild(recetaIngredients);
+});
 }
-mostrarRecetas()
+
+async function menu(){
+  await sandwiches();
+  await pizzas();
+  await ensaladas();
+  await primerPlato();
+  await postres();
+  await bebidas();
+ 
+}
+
+menu()
 
 
 

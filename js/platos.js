@@ -2,7 +2,7 @@
 
 export function platoGetRecipes(){
     let recipes = localStorage.getItem("recipes");
-    if (recipes === null){
+    if (recipes === null || recipes === "undefined"){
         return[];
     }
     return JSON.parse(recipes);
@@ -15,7 +15,7 @@ function platoSaveRecipes(recipes){
 
 export function platoAddRecipes(recipe){
     let recipes = platoGetRecipes();
-    if (inList(recipe,recipes !== -1)){
+    if (inList(recipe,recipes)!== -1){
         return;
     }
     recipes.push(recipe);
@@ -23,7 +23,7 @@ export function platoAddRecipes(recipe){
 }
 
 function inList(recipe,recipes){
-    let index = recipes.findindex(element => element.id === recipe.id);
+    let index = recipes.findIndex(element => element.id === recipe.id);
     return index;
 }
 

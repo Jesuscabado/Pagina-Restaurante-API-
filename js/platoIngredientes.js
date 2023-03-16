@@ -1,4 +1,4 @@
-//import { PlatoGetRecipes, platoAddRecipes } from "./platos.js";
+import { platoGetRecipes, platoAddRecipes } from "./platos.js";
 
 
 
@@ -32,29 +32,26 @@ async function mostrarRecetas(url) {
     const comida = document.createElement("section");
     const title = document.createElement("h1");
     const lista = document.createElement("ul");
+    const button = document.createElement('button'); 
+    button.type = 'button'; 
+    button.innerText = 'añadir al carrito'; 
     title.innerText = receta.name.replace(/\srecipe[s]?/gim, "")
     .replace(/,[s]*/g, ", ");
     comida.setAttribute("id", "sectionComida");
     results.appendChild(title);
     results.appendChild(comida);
     const recetaImagen = document.createElement("img");
-    recetaImagen.addEventListener("click",() => platoAddRecipes(recipe)); 
-    
+    button.addEventListener("click",() => platoAddRecipes(receta)); 
     receta.ingredients.forEach((element) => {
         let ingredient = document.createElement("li");
         ingredient.innerText = element;
-        lista.appendChild(ingredient);
-        
+        lista.appendChild(ingredient);  
     });
 
-    
-    
-    
-
     recetaImagen.src = receta.image;
-   
     results.appendChild(title);
     results.appendChild(recetaImagen);
+    results.appendChild(button);
     results.appendChild(lista);
 
   

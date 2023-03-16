@@ -112,6 +112,7 @@ async function mostrarRecetas(url, nombre) {
     let recetaImagen = document.createElement("img");
     recetaImagen.onload = function(){ //muestra la imagen  cuando se carga el resto de elementos
       recetaArticle.style.display = "block";
+
     }
     let recetaUrl = document.createElement("a");
     let Rick = document.createElement("a");
@@ -136,13 +137,29 @@ async function mostrarRecetas(url, nombre) {
 });
 }
 
+function Cargando(){
+  let imgSection = document.createElement("section");
+  imgSection.id = "loadImagen";
+  let img = document.createElement("img");
+  img.src = "../media/loading.gif";
+  imgSection.appendChild(img)
+  document.getElementById("results").appendChild(imgSection);
+}
+
+function finalizarCarga(){
+  let image = document.getElementById("loadImagen");
+  image.remove();
+}
+
 async function menu(){
+  Cargando();
   await sandwiches();
  /*  await pizzas(); */
   await ensaladas();
   await primerPlato();
   await postres();
   await bebidas();
+  finalizarCarga();
  
 }
 

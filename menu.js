@@ -86,9 +86,7 @@ async function getRecipes(url){
       return {
         name: element.recipe.label, 
         image: element.recipe.image,
-        url: element.recipe.shareAs,
-        urlRick : element.recipe.uri.split("_")[1],
-        ingredients: element.recipe.ingredientLines
+        id : element.recipe.uri.split("_")[1],
       };
     });
   })
@@ -109,33 +107,32 @@ async function mostrarRecetas(url, nombre) {
   
   recetas.forEach((hit) => {
     let recetaArticle = document.createElement("article");
+    recetaArticle.style.display = "none";
     let recetaName = document.createElement("h2");
     let recetaImagen = document.createElement("img");
     recetaImagen.onload = function(){ //muestra la imagen  cuando se carga el resto de elementos
       recetaArticle.style.display = "block";
     }
     let recetaUrl = document.createElement("a");
-    let recetaUrlRick = document.createElement("a");
-    recetaUrlRick.href = "https://youtu.be/dQw4w9WgXcQ?t=42autoplay=1&mute=0";
-    let recetaIngredients = document.createElement("p");
+    let Rick = document.createElement("a");
+    Rick.href = "https://youtu.be/dQw4w9WgXcQ?t=42autoplay=1&mute=0";
   
   recetaArticle.classList.add("receta");
  
   recetaName.innerText = hit.name.replace(/\srecipe[s]?/gim, "")
   .replace(/,[s]*/g, ", ");
   recetaImagen.src = hit.image;
-  recetaUrl.setAttribute("href",hit.url);
+  recetaUrl.setAttribute("href", "platos.html?id=" + hit.id );
   recetaUrl.setAttribute("target", "_blank")
-  recetaUrlRick.setAttribute("target", "_blank");
-  recetaUrlRick.innerText = "Alergenos";
-  recetaIngredients.innerText = hit.ingredients.join(", ");
+  Rick.setAttribute("target", "_blank");
+  Rick.innerText = "Alergenos";
 
   comida.appendChild(recetaArticle);
   recetaUrl.appendChild(recetaImagen);
   recetaArticle.appendChild(recetaName);
   recetaArticle.appendChild(recetaUrl);
-  recetaArticle.appendChild(recetaUrlRick);
-  recetaArticle.appendChild(recetaIngredients);
+  recetaArticle.appendChild(Rick);
+
 });
 }
 

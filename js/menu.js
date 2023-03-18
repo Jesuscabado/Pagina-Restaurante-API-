@@ -101,11 +101,11 @@ async function mostrarRecetas(url, nombre, id) {
 });
 }
 
-function Cargando(){
+async function Cargando(){
   let imgSection = document.createElement("section");
   imgSection.id = "loadImagen";
   let img = document.createElement("img");
-  img.src = "../media/loading.gif";
+  img.src = "../media/imagenes/loading.gif";
   imgSection.appendChild(img)
   document.getElementById("results").appendChild(imgSection);
 }
@@ -116,7 +116,7 @@ function finalizarCarga(){
 }
 
 async function menu(){
-  Cargando();
+  await Cargando();
   await ensaladas();
   await sandwiches();
   await primerPlato();

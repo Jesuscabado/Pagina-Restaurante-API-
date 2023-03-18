@@ -1,0 +1,73 @@
+
+html {
+  scroll-behavior: smooth;
+  background-color: #dcd7a4;
+}
+
+#loadImagen {
+  position: absolute;
+}
+body {
+  padding-top: 140px;
+}
+header {
+  position: fixed;
+  top: 0;
+  background-color: #fb0b0b00;
+  padding: 16px;
+  font-size: 120%;
+  }
+
+nav {
+    background-color: #a2eb95;
+    color: #e3de42;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+  }
+  
+  nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  nav li {
+    margin: 0 10px;
+  }
+  
+  nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+  }
+  
+  nav a:hover {
+    background-color: #fff;
+    color: #333;
+  }
+
+  #plato-principal {
+    background-color: #0c71ec;
+  }
+  
+  #ensaladas {
+    background-color: #82c84c;
+  }
+  
+  
+  #sandwiches {
+    background-color: #db4c1c;
+  }
+  
+  #postres {
+    background-color: #f50bd9;
+  }
+
+  #bebidas {
+    background-color: #9c6dbe;
+  }
+   
+  
+    

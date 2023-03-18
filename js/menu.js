@@ -1,71 +1,34 @@
-/* 
-
-function searchRecipes(searchInput) {
-  const baseUrl = createBaseUrl();
-  baseUrl.pathname = "/search";
-
-  // Agregar parámetros de búsqueda
-  baseUrl.searchParams.set("q", searchInput.value); // Palabra clave de búsqueda
-  baseUrl.searchParams.set("from", 0); // Primer resultado
-  baseUrl.searchParams.set("to", 10); // Último resultado (máximo 100)
-
-
-  // Realizar solicitud a la API
-  fetch(baseUrl)
-    .then(response => response.json())
-    .then(data => {
-      // Procesar resultados de la búsqueda
-      console.log(data.hits);
-    })
-    .catch(error => {
-      console.error(error);
-    });
-}
-
-const searchInput = document.getElementById("searchInput");
-
-searchInput.addEventListener("Enter", event => {
-  if (event.key === "Enter") {
-    searchRecipes(searchInput);
-  }
-});
- */
 
 async function primerPlato(){
   let url = createBaseUrl();
   url.searchParams.append("dishType", "main course");
-await mostrarRecetas(url,"primer plato")
+await mostrarRecetas(url,"Plato Principal", "plato-principal")
 }
 
 async function ensaladas(){
   let url = createBaseUrl();
   url.searchParams.append("dishType", "salad");
-await mostrarRecetas(url,"ensaladas") 
+await mostrarRecetas(url,"Ensaladas", "ensaladas") 
 }
 
 async function sandwiches(){
   let url = createBaseUrl();
   url.searchParams.append("dishType", "sandwiches");
-await mostrarRecetas(url,"sandwiches") 
+await mostrarRecetas(url,"Sandwiches", "sandwiches") 
 }
 
 async function postres(){
   let url = createBaseUrl();
   url.searchParams.append("dishType", "desserts");
-await mostrarRecetas(url,"postres") 
+await mostrarRecetas(url,"Postres","postres") 
 }
 
 async function bebidas(){
   let url = createBaseUrl();
   url.searchParams.append("dishType", "drinks");
-await mostrarRecetas(url,"drinks") 
+await mostrarRecetas(url,"Bebidas", "bebidas") 
 }
 
-/* async function pizzas(){
-  let url = createBaseUrl();
-  url.searchParams.append("q", "pizza");
-await mostrarRecetas(url, "pizza")
-} */
 
 function createBaseUrl(){
   let url = new URL("https://api.edamam.com/api/recipes/v2")
@@ -95,13 +58,14 @@ async function getRecipes(url){
 }
 
 
-async function mostrarRecetas(url, nombre) {
+
+async function mostrarRecetas(url, nombre, id) {
   const recetas = await getRecipes(url);
   const results = document.getElementById("results");
   const comida = document.createElement("section");
   const title = document.createElement("h1");
   title.innerText = nombre;
-  comida.setAttribute("id", "sectionComida");
+  title.setAttribute("id", id);
   results.appendChild(title);
   results.appendChild(comida);
   
@@ -153,9 +117,8 @@ function finalizarCarga(){
 
 async function menu(){
   Cargando();
-  await sandwiches();
- /*  await pizzas(); */
   await ensaladas();
+  await sandwiches();
   await primerPlato();
   await postres();
   await bebidas();

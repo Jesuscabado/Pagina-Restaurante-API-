@@ -32,7 +32,7 @@ async function mostrarRecetas(url) {
     const comida = document.createElement("section");
     const title = document.createElement("h1");
     const lista = document.createElement("ul");
-    const button = document.createElement('button'); 
+    const button = document.createElement("button"); 
     button.type = 'button'; 
     button.innerText = 'añadir al carrito'; 
     title.innerText = receta.name.replace(/\srecipe[s]?/gim, "")
@@ -41,13 +41,16 @@ async function mostrarRecetas(url) {
     results.appendChild(title);
     results.appendChild(comida);
     const recetaImagen = document.createElement("img");
-    button.addEventListener("click",() => platoAddRecipes(receta)); 
+    button.addEventListener("click",() => addAndShow(receta))
+    
     receta.ingredients.forEach((element) => {
         let ingredient = document.createElement("li");
         ingredient.innerText = element;
         lista.appendChild(ingredient);  
     });
 
+    console.log(platoGetRecipes("recipe"));
+    
     recetaImagen.src = receta.image;
     results.appendChild(title);
     results.appendChild(recetaImagen);
@@ -55,6 +58,19 @@ async function mostrarRecetas(url) {
     results.appendChild(lista);
 
   
+}
+
+function addAndShow(receta){
+    platoAddRecipes(receta);
+    let recipes = platoGetRecipes();
+    let pedidos = document.getElementById("pedidos");
+    pedidos.innerHTML = "";
+    recipes.forEach((recipe) => {
+        let linea = document.createElement("p");
+        linea.innerText = recipe.name;
+        pedidos.appendChild(linea); 
+    });
+    
 }
 
 let url = createBaseUrl();

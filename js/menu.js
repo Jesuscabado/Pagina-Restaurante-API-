@@ -101,7 +101,7 @@ async function mostrarRecetas(url, nombre, id) {
 });
 }
 
-async function Cargando(){
+function Cargando(){
   let imgSection = document.createElement("section");
   imgSection.id = "loadImagen";
   let img = document.createElement("img");
@@ -116,7 +116,7 @@ function finalizarCarga(){
 }
 
 async function menu(){
-  await Cargando();
+   Cargando();
   await ensaladas();
   await sandwiches();
   await primerPlato();

@@ -1,44 +1,42 @@
 
 html {
-  scroll-behavior: smooth;
-  background-color: #dcd7a4;
+    scroll-behavior: smooth;
+    background-color: #dcd7a4;
 }
 #inicio {
- 
-  
-  top: 0;
-  background-color: #a2eb95;
-  padding: 16px;
-  font-size: 150%;
+    top: 0;
+    background-color: #a2eb95;
+    padding: 16px;
+    font-size: 150%;
 }
 
 #loadImagen {
-  position: absolute;
+    position: absolute;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .receta {
-  width: 30%;
-  border-radius: 20px;
-  margin: 2,5%;
-  padding: 6%;
-  font-size: 30px;
-  display: flex;
-  flex-wrap: wrap;
-  text-align: left;
+    width: 30%;
+    border-radius: 20px;
+    margin: 2,5%;
+    padding: 6%;
+    font-size: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: left;
 }
 body {
-  padding-top: 140px;
+    padding-top: 140px;
 }
 header {
-  position: fixed;
-  top: 0;
-  background-color: #fb0b0b00;
-  padding: 16px;
-  font-size: 120%;
+    position: fixed;
+    top: 0;
+    background-color: #fb0b0b00;
+    padding: 16px;
+    font-size: 120%;
   }
 
 nav {
